@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gourmet Bistro - Food Menu</title>
+  <!-- Tailwind CSS Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-stone-950 text-stone-100 min-h-screen font-sans antialiased selection:bg-amber-500 selection:text-stone-950">
+
+  <!-- Header Banner -->
+  <header class="py-12 px-6 text-center border-b border-stone-800 bg-stone-900/40 backdrop-blur-md">
+    <span class="text-amber-500 font-semibold text-xs tracking-widest uppercase block mb-2">Handcrafted Delights</span>
+    <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-3">Our Chef's Special Menu</h1>
+    <p class="text-stone-400 max-w-xl mx-auto text-sm md:text-base">Freshly sourced organic ingredients, prepared with culinary passion and served hot to your table.</p>
+  </header>
+
+  <!-- Main Menu Grid Section -->
+  <main class="max-w-7xl mx-auto px-6 py-12">
+    
+    <!-- CSS Grid Container (Mobile: 1, Tablet: 2, Desktop: 3 columns) -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+      <!-- Dish Card 1: Artisan Pizza -->
+      <article class="bg-stone-900 border border-stone-800 rounded-3xl overflow-hidden flex flex-col justify-between shadow-lg hover:shadow-2xl hover:shadow-amber-500/10 hover:border-amber-500/40 transition-all duration-300 group">
+        <div>
+          <!-- Aspect-Video Image Container -->
+          <div class="relative aspect-video overflow-hidden bg-stone-800">
+            <img 
+              src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80" 
+              alt="Margherita Pizza" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            />
+            <span class="absolute top-3 left-3 bg-stone-950/80 backdrop-blur-md text-amber-400 text-xs font-semibold px-3 py-1 rounded-full border border-amber-500/30">⭐ 4.9</span>
+            <span class="absolute top-3 right-3 bg-emerald-950/80 text-emerald-400 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider border border-emerald-500/30">Veg</span>
+          </div>
+
+          <!-- Card Content -->
+          <div class="p-6">
+            <div class="flex justify-between items-start mb-2">
+              <h2 class="text-xl font-bold text-white group-hover:text-amber-400 transition-colors">Margherita Pizza</h2>
+              <span class="text-lg font-black text-amber-500 bg-amber-500/10 px-2.5 py-0.5 rounded-lg border border-amber-500/20">₹249</span>
+            </div>
+            <p class="text-stone-400 text-sm leading-relaxed">Classic wood-fired pizza topped with fresh San Marzano basil, organic vine tomatoes, and creamy mozzarella.</p>
+          </div>
+        </div>
+
+        <!-- Card Footer Action Button -->
+        <div class="px-6 pb-6 pt-2">
+          <button class="w-full bg-stone-800 hover:bg-amber-500 hover:text-stone-950 active:scale-95 text-stone-200 font-bold py-3 px-4 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 group/btn">
+            <span>Order Now</span>
+            <span class="text-sm transition-transform duration-200 group-hover/btn:translate-x-1">→</span>
+          </button>
+        </div>
+      </article>
+
+      <!-- Dish Card 2: Gourmet Burger -->
+      <article class="bg-stone-900 border border-stone-800 rounded-3xl overflow-hidden flex flex-col justify-between shadow-lg hover:shadow-2xl hover:shadow-amber-500/10 hover:border-amber-500/40 transition-all duration-300 group">
+        <div>
+          <!-- Aspect-Video Image Container -->
+          <div class="relative aspect-video overflow-hidden bg-stone-800">
+            <img 
+              src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80" 
+              alt="Cheese Burger" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            />
+            <span class="absolute top-3 left-3 bg-stone-950/80 backdrop-blur-md text-amber-400 text-xs font-semibold px-3 py-1 rounded-full border border-amber-500/30">⭐ 4.8</span>
+            <span class="absolute top-3 right-3 bg-amber-950/80 text-amber-400 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider border border-amber-500/30">Bestseller</span>
+          </div>
+
+          <!-- Card Content -->
+          <div class="p-6">
+            <div class="flex justify-between items-start mb-2">
+              <h2 class="text-xl font-bold text-white group-hover:text-amber-400 transition-colors">Cheese Burger</h2>
+              <span class="text-lg font-black text-amber-500 bg-amber-500/10 px-2.5 py-0.5 rounded-lg border border-amber-500/20">₹149</span>
+            </div>
+            <p class="text-stone-400 text-sm leading-relaxed">Juicy grilled patty layered with melted cheddar cheese, crisp iceberg lettuce, and our house signature secret sauce.</p>
+          </div>
+        </div>
+
+        <!-- Card Footer Action Button -->
+        <div class="px-6 pb-6 pt-2">
+          <button class="w-full bg-stone-800 hover:bg-amber-500 hover:text-stone-950 active:scale-95 text-stone-200 font-bold py-3 px-4 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 group/btn">
+            <span>Order Now</span>
+            <span class="text-sm transition-transform duration-200 group-hover/btn:translate-x-1">→</span>
+          </button>
+        </div>
+      </article>
+
+      <!-- Dish Card 3: Creamy Pasta -->
+      <article class="bg-stone-900 border border-stone-800 rounded-3xl overflow-hidden flex flex-col justify-between shadow-lg hover:shadow-2xl hover:shadow-amber-500/10 hover:border-amber-500/40 transition-all duration-300 group">
+        <div>
+          <!-- Aspect-Video Image Container -->
+          <div class="relative aspect-video overflow-hidden bg-stone-800">
+            <img 
+              src="https://images.unsplash.com/photo-1621996346565-e3d5d6281270?auto=format&fit=crop&w=800&q=80" 
+              alt="Creamy Pasta" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            />
+            <span class="absolute top-3 left-3 bg-stone-950/80 backdrop-blur-md text-amber-400 text-xs font-semibold px-3 py-1 rounded-full border border-amber-500/30">⭐ 4.7</span>
+            <span class="absolute top-3 right-3 bg-emerald-950/80 text-emerald-400 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider border border-emerald-500/30">Veg</span>
+          </div>
+
+          <!-- Card Content -->
+          <div class="p-6">
+            <div class="flex justify-between items-start mb-2">
+              <h2 class="text-xl font-bold text-white group-hover:text-amber-400 transition-colors">Creamy Pasta</h2>
+              <span class="text-lg font-black text-amber-500 bg-amber-500/10 px-2.5 py-0.5 rounded-lg border border-amber-500/20">₹199</span>
+            </div>
+            <p class="text-stone-400 text-sm leading-relaxed">Al dente Penne tossed in rich parmesan white sauce, infused with aromatic Italian herbs and garden vegetables.</p>
+          </div>
+        </div>
+
+        <!-- Card Footer Action Button -->
+        <div class="px-6 pb-6 pt-2">
+          <button class="w-full bg-stone-800 hover:bg-amber-500 hover:text-stone-950 active:scale-95 text-stone-200 font-bold py-3 px-4 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 group/btn">
+            <span>Order Now</span>
+            <span class="text-sm transition-transform duration-200 group-hover/btn:translate-x-1">→</span>
+          </button>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <!-- Footer Section -->
+  <footer class="py-6 text-center text-xs text-stone-500 border-t border-stone-800 mt-12">
+    © 2026 S. B. Jain Institute of Technology, Management & Research, Nagpur
+  </footer>
+
+</body>
+</html>
