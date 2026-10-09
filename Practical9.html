@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Flow - Personal To-Do List</title>
+  <!-- Tailwind CSS Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 text-slate-100 min-h-screen font-sans flex flex-col justify-between p-4 md:p-8">
+
+  <!-- Main Application Container -->
+  <main class="max-w-xl mx-auto w-full my-auto">
+    
+    <!-- Title Header -->
+    <div class="text-center mb-6">
+      <span class="bg-indigo-500/10 text-indigo-400 text-xs font-bold uppercase tracking-widest px-3.5 py-1.5 rounded-full border border-indigo-500/20">
+        Lab Practical 09
+      </span>
+      <h1 class="text-3xl font-extrabold text-white mt-3 tracking-tight">
+        Personal Task Planner
+      </h1>
+      <p id="taskCounter" class="text-slate-400 text-xs mt-1.5 font-medium">
+        0 of 0 tasks completed
+      </p>
+    </div>
+
+    <!-- Main Card -->
+    <div class="bg-slate-900/80 border border-slate-800 backdrop-blur-xl rounded-3xl p-6 md:p-8 shadow-2xl space-y-6">
+      
+      <!-- Input & Add Form Group -->
+      <form id="todoForm" class="flex gap-2" onsubmit="event.preventDefault(); addTask();">
+        <input 
+          type="text" 
+          id="taskInput" 
+          placeholder="e.g. Prepare for Data Structures viva..." 
+          class="flex-1 bg-slate-950/80 border border-slate-700/80 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all placeholder:text-slate-600"
+        />
+        <button 
+          type="submit" 
+          class="bg-indigo-600 hover:bg-indigo-500 active:scale-95 text-white font-bold text-sm px-5 py-3 rounded-xl transition-all shadow-lg shadow-indigo-600/30 flex items-center justify-center gap-1.5"
+        >
+          <span>Add</span>
+        </button>
+      </form>
+
+      <!-- Alert Message Box -->
+      <div id="inputAlert" class="hidden text-xs text-rose-400 bg-rose-500/10 border border-rose-500/20 rounded-xl p-3"></div>
+
+      <!-- Task Items Container -->
+      <div class="space-y-3">
+        <ul id="taskList" class="space-y-3">
+          <!-- Dynamically populated task items will appear here -->
+        </ul>
+
+        <!-- Empty State Message -->
+        <div id="emptyTaskState" class="text-center py-10 text-slate-500">
+          <span class="text-3xl block mb-2">📋</span>
+          <p class="text-xs">Your workspace is clear. Add a task to get started!</p>
+        </div>
+      </div>
+
+      <!-- Card Footer Actions -->
+      <div class="pt-4 border-t border-slate-800/80 flex justify-between items-center text-xs text-slate-500">
+        <span id="activeCount">0 active items</span>
+        <button onclick="clearCompleted()" class="hover:text-rose-400 transition-colors">Clear Completed</button>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="py-4 text-center text-xs text-slate-600 mt-6">
+    © 2026 S. B. Jain Institute of Technology, Management & Research, Nagpur
+  </footer>
+
+  <!-- JavaScript Task Engine -->
+  <script>
+    // 1. Array State and Local Storage Retrieval
+    let tasks = JSON.parse(localStorage.getItem('student_todos')) || [];
+
+    // Save to browser LocalStorage
+    function saveTasks() {
+      localStorage.setItem('student_todos', JSON.stringify(tasks));
+    }
+
+    // 2. Add New Task[cite: 46, 47]
+    function addTask() {
+      const taskInput = document.getElementById('taskInput');
+      const inputAlert = document.getElementById('inputAlert');
+      const text = taskInput.value.trim(); // Trim leading/trailing whitespace[cite: 47, 48]
+
+      // Validation check for empty input[cite: 47, 48]
+      if (text === '') {
+        inputAlert.textContent = "Please enter a task description before adding.";
+        inputAlert.classList.remove('hidden');
+        return;
+      }
+      inputAlert.classList.add('hidden');
+
+      // Create Task Object
+      const newTask = {
+        id: Date.now(),
+        text: text,
+        completed: false
+      };
+
+      tasks.push(newTask);
+      saveTasks();
+      renderTasks();
+
+      taskInput.value = ''; // Reset input field[cite: 47]
+    }
+
+    // 3. Toggle Completion State[cite: 46, 47]
+    function toggleComplete(id) {
+      tasks = tasks.map(task => {
+        if (task.id === id) {
+          return { ...task, completed: !task.completed };
+        }
+        return task;
+      });
+      saveTasks();
+      renderTasks();
+    }
+
+    // 4. Delete Single Task Node[cite: 46, 47]
+    function deleteTask(id) {
+      tasks = tasks.filter(task => task.id !== id);
+      saveTasks();
+      renderTasks();
+    }
+
+    // Clear all completed tasks
+    function clearCompleted() {
+      tasks = tasks.filter(task => !task.completed);
+      saveTasks();
+      renderTasks();
+    }
+
+    // 5. Render Tasks & Update Metrics[cite: 46, 47]
+    function renderTasks() {
+      const taskList = document.getElementById('taskList');
+      const emptyTaskState = document.getElementById('emptyTaskState');
+      const taskCounter = document.getElementById('taskCounter');
+      const activeCount = document.getElementById('activeCount');
+
+      taskList.innerHTML = '';
+
+      if (tasks.length === 0) {
+        emptyTaskState.classList.remove('hidden');
+      } else {
+        emptyTaskState.classList.add('hidden');
+      }
+
+      let completedCount = 0;
+
+      // Dynamic Element Generation using createElement and DOM append[cite: 46, 47]
+      tasks.forEach(task => {
+        if (task.completed) completedCount++;
+
+        const li = document.createElement('li');
+        li.className = `p-4 rounded-2xl border transition-all flex items-center justify-between gap-3 ${
+          task.completed 
+            ? 'bg-slate-950/40 border-slate-800/60 text-slate-500' 
+            : 'bg-slate-950/80 border-slate-800 text-slate-100 hover:border-slate-700'
+        }`;
+
+        li.innerHTML = `
+          <div class="flex items-center gap-3 overflow-hidden cursor-pointer flex-1" onclick="toggleComplete(${task.id})">
+            <div class="w-5 h-5 rounded-md border flex items-center justify-center transition-colors ${
+              task.completed 
+                ? 'bg-indigo-600 border-indigo-600 text-white' 
+                : 'border-slate-700 bg-slate-900'
+            }">
+              ${task.completed ? '✓' : ''}
+            </div>
+            <span class="text-sm font-medium truncate select-none ${task.completed ? 'line-through text-slate-500' : ''}">
+              ${task.text}
+            </span>
+          </div>
+          <button 
+            onclick="deleteTask(${task.id})" 
+            class="text-slate-500 hover:text-rose-400 font-bold text-sm px-2 py-1 rounded-lg hover:bg-rose-500/10 transition-all"
+            title="Delete task"
+          >
+            ✕
+          </button>
+        `;
+
+        taskList.appendChild(li); // Appending dynamic element[cite: 46]
+      });
+
+      // Update State Tracking Metrics[cite: 46]
+      taskCounter.textContent = `${completedCount} of ${tasks.length} tasks completed`;
+      activeCount.textContent = `${tasks.length - completedCount} active items`;
+    }
+
+    // Initial DOM Render[cite: 46]
+    renderTasks();
+  </script>
+
+</body>
+</html>
